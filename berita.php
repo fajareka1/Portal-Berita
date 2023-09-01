@@ -24,14 +24,14 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="home.html">Portal Berita</a>
+      <a class="navbar-brand" href="home.php">Portal Berita</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="master-berita.html">Master Berita</a>
+          <a class="nav-link" href="master-berita.php">Master Berita</a>
         </div>
       </div>
     </div>
@@ -43,6 +43,7 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
   <?php
     // Loop through the query results
     while ($row = mysqli_fetch_assoc($hasil)) {
+      
       $judulBerita = $row['judul_berita'];
       $isiBerita = $row['deskripsi_berita'];
       $gambarBerita = $row['gambar_berita'];

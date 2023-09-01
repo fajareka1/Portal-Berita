@@ -1,3 +1,10 @@
+<?php
+// buat koneksi database dengan connect file
+include("connect.php");
+// fetch semua data motor dari database
+$hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_berita DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,34 +31,41 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="master-berita.html">Master Berita</a>
+          <a class="nav-link" href="master-berita.php">Master Berita</a>
         </div>
       </div>
     </div>
   </nav>
 
-<h1 class="text-white mt-5 mx-3" style="font-style: italic;">Sejumlah Berita Yang Kami Paparkan</h1>
 
-<!-- Card -->
-<div class="row row-cols-1 row-cols-md-2 g-4 mt-5 mx-3">
-  <div class="col">
-    <div class="card bg-dark text-white">
-      <div class="container">
-        <div class="d-flex justify-content-center">
-          <img src="lukaku.jpeg" class="card-img-top" alt="..." style="width: 10cm;">
+  <h2>Sejumlah Berita Yang Kami Paparkan:</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-5 mx-3">
+  <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
+    <div class="col">
+      <div class="card bg-dark text-white">
+        <div class="container">
+          <div class="d-flex justify-content-center">
+            <img src="<?php echo $row['gambar_berita']; ?>" class="card-img-top" alt="..." style="width: 10cm;">
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title" style="text-align: center;">Judul Berita</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.</p>
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;"><?php echo $row['judul_berita']; ?></h5>
+          <p class="card-text"><?php echo $row['deskripsi_berita']; ?></p>
           <div class="container">
             <div class="d-flex justify-content-center">
-              <a href="berita.html" type="button" class="btn btn-primary ">Lihat Lebih</a>
+              <a href="berita.php?id_berita=<?= $row['id_berita'] ?>" type="button" class="btn btn-primary">Lihat Lebih</a>
+              <!-- <a href="edit.php?id_berita=<?= $row['id_berita'] ?>" type="button" class="btn btn-warning mx-2">Update</a>
+              <a href="delete.php?id_berita=<?= $row['id_berita'] ?>" type="button" class="btn btn-danger mx-2">Delete</a> -->
             </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
+  <?php } ?>
+</div>
+
+
+</body>
 
 </html>

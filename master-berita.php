@@ -31,7 +31,7 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="master-berita.html">Master Berita</a>
+          <a class="nav-link" href="master-berita.php">Master Berita</a>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title" style="text-align: center;"><?php echo $row['judul_berita']; ?></h5>
-          <p class="card-text"><?php echo $row['deskripsi_berita']; ?></p>
+          <h5 class="card-title text-white" style="text-align: center;"><?php echo $row['judul_berita']; ?></h5>
+          <p class="card-text text-white"><?php echo $row['deskripsi_berita']; ?></p>
           <div class="container">
             <div class="d-flex justify-content-center">
               <a href="berita.php" type="button" class="btn btn-primary">Lihat Lebih</a>
-              <a href="edit.php" type="button" class="btn btn-warning mx-2">Update</a>
-              <a href="delete.php" type="button" class="btn btn-danger mx-2">Delete</a>
+              <a href="edit.php?id_berita=<?= $row['id_berita'] ?>" type="button" class="btn btn-warning mx-2">Update</a>
+              <a href="delete.php?id_berita=<?= $row['id_berita'] ?>" type="button" class="btn btn-danger mx-2">Delete</a>
             </div>
           </div>
         </div>

@@ -36,7 +36,7 @@
             Deskripsi :
           </label>
         </div>
-        <input type="text" style="width: 100%; border: 2px solid black; border-radius: 5px;" name="deskripsi_berita">
+        <input type="text" style="width: 100%; border: 2px solid black; border-radius: 5px;" name="deskripsi_berita" class="">
       </div>
       <div style="width: 100%; display: block; margin-top: 10px; margin-bottom: 10px;">
         <div style="margin-bottom: 5px;">
