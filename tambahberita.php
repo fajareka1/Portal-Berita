@@ -11,48 +11,33 @@
 </head>
 
 <body>
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="home.php">Portal Berita</a>
-    </div>
-  </nav>
 
-  <!-- form -->
-  <h2 class="text-center">Tambah Data Berita</h2>
-  <div class="container">
-    <form action="tambahberita.php" method="post" name="form1" enctype="multipart/form-data">
-      <div style="width: 100%; display: block; margin-top: 10px; margin-bottom: 10px;">
-        <div style="margin-bottom: 5px;">
-          <label>
-            Judul :
-          </label>
+  <div class="container w-100 d-flex justify-content-center">
+        <div class="w-50 text-light p-4 rounded bg-dark" style="margin-top: 10%;">
+            <form action="" method="POST" class="login-email" enctype="multipart/form-data">
+                <h4 class="login-text">Tambah Berita</h4>
+                <label for="judul_berita" class="form-label">Judul Berita</label>
+                <div class="input-group mb-3 text-start">
+                  <input type="text" class="form-control" name="judul_berita">
+                </div>
+                <label for="gambar_berita" class="form-label">Gambar Berita</label>
+                <div class="input-group mb-3 text-start">
+                  <input type="file" class="form-control" name="gambar_berita" >
+                </div>
+                <label for="deskripsi_berita" class="form-label">Deskripsi Berita</label>
+                <div class="input-group mb-3 text-start">
+                  <textarea class="form-control"  name="deskripsi_berita"></textarea>
+                </div>
+                <div class="input-group mb-3 text-start">
+                  <button name="submit" type="submit" class="btn btn-primary " onclick="return confirm('yakin dek??');">Submit</button>
+                  <a href='master-berita.php' class="btn btn-danger ">Cancel</a>
+                </div>
+            </form>
         </div>
-        <input type="text" style="width: 100%; border: 2px solid black; border-radius: 5px;" name="judul_berita">
-      </div>
-      <div style="width: 100%; display: block; margin-top: 10px; margin-bottom: 10px;">
-        <div style="margin-bottom: 5px;">
-          <label>
-            Deskripsi :
-          </label>
-        </div>
-        <input type="text" style="width: 100%; border: 2px solid black; border-radius: 5px;" name="deskripsi_berita" class="">
-      </div>
-      <div style="width: 100%; display: block; margin-top: 10px; margin-bottom: 10px;">
-        <div style="margin-bottom: 5px;">
-          <label>
-            Gambar Berita:
-          </label>
-        </div>
-        <input type="file" name="gambar_berita">
-      </div>
-      <input type="submit" name="Submit" value="Tambah Berita" class="btn btn-primary">
-      <a href="master-berita.php" class="btn btn-danger">Kembali</a>
-    </form>
-  </div>
+    </div>
 
   <?php
-  if (isset($_POST['Submit'])) {
+  if (isset($_POST['submit'])) {
     $judul_berita = $_POST['judul_berita'];
     $deskripsi_berita = $_POST['deskripsi_berita'];
 
@@ -67,7 +52,8 @@
         $hasil = mysqli_query($connection, "INSERT INTO master_berita (judul_berita, deskripsi_berita, gambar_berita) VALUES ('$judul_berita', '$deskripsi_berita', '$gambar_path')");
 
         if ($hasil) {
-          echo "Data Berita Berhasil Ditambahkan. <a href='master_berita.php'>Data Berita</a>";
+          echo "<script>alert('Selamat Update Berhasil')</script>";
+          header("Location: master-berita.php");
         } else {
           echo "Gagal menambahkan data berita: " . mysqli_error($connection);
         }

@@ -13,31 +13,23 @@ if (isset($_SESSION['username'])) {
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
+    $role = 1;
     
-    if ($password == $cpassword) {
         $sql = "SELECT * FROM users WHERE email='$email'";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($connection, $sql);
         if (!$result->num_rows > 0) {
-            $sql = "INSERT INTO users (username, email, password)
-                    VALUES ('$username', '$email', '$password')";
-            $result = mysqli_query($conn, $sql);
-            if ($result) {
+            $sqli = "INSERT INTO users(id_user, email, username, password, role) VALUES ('','$email', '$username', '$password', '$role')";
+            $insert = mysqli_query($connection, "INSERT INTO users( email, username, password, role) VALUES ('$email', '$username', '$password', '$role')");
+            if ($insert) {
+                header("Location: index.php");
                 echo "<script>alert('Selamat, registrasi berhasil!')</script>";
-                $username = "";
-                $email = "";
-                $_POST['password'] = "";
-                $_POST['cpassword'] = "";
             } else {
                 echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
             }
         } else {
             echo "<script>alert('Woops! Email Sudah Terdaftar.')</script>";
         }
-         
-    } else {
-        echo "<script>alert('Password Tidak Sesuai')</script>";
-    }
 }
  
 ?>
@@ -47,34 +39,52 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
  
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- 
-    <link rel="stylesheet" type="text/css" href="style.css">
- 
-    <title>Niagahoster Register</title>
+    <title>Register</title>
 </head>
 <body>
-    <div class="container">
-        <form action="" method="POST" class="login-email">
-            <p class="login-text" style="font-size: 2rem; font-weight: 800;">Register</p>
-            <div class="input-group">
-                <input type="text" placeholder="Username" name="username" value="<?php echo $username; ?>" required>
-            </div>
-            <div class="input-group">
-                <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
-            </div>
-            <div class="input-group">
-                <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
-            </div>
-            <div class="input-group">
-                <input type="password" placeholder="Confirm Password" name="cpassword" value="<?php echo $_POST['cpassword']; ?>" required>
-            </div>
-            <div class="input-group">
-                <button name="submit" class="btn">Register</button>
-            </div>
-            <p class="login-register-text">Anda sudah punya akun? <a href="index.php">Login </a></p>
-        </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home.php">Portal Berita</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav w-100 d-flex justify-content-end">
+          <a class="nav-link" href="index.php">Login</a>
+          <a class="nav-link active" href="register.php">Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <div class="container w-100 d-flex justify-content-center">
+        <div class="w-50 text-light p-4 rounded bg-dark" style="margin-top: 10%;">
+            <form action="" method="POST" class="login-email">
+                <h4 class="login-text">Register</h4>
+                <label for="username" class="form-label">Username</label>
+                <div class="input-group mb-3 text-start">
+                    <input type="text" class="form-control" placeholder="Username" name="username"  required>
+                </div>
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group mb-3 text-start">
+                    <input type="email" placeholder="Email" class="form-control" name="email" required>
+                </div>
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group mb-3 text-start">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                </div>
+                <div class="input-group mb-3 text-start">
+                    <button name="submit" type="submit" class="btn btn-primary">Register</button>
+                </div>
+                <p class="login-register-text">Anda sudah punya akun? <a href="index.php">Login </a></p>
+            </form>
+        </div>
     </div>
 </body>
 </html>

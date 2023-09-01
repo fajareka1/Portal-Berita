@@ -1,8 +1,12 @@
 <?php
 // buat koneksi database dengan connect file
 include("connect.php");
+
+session_start();
+
 // fetch semua data motor dari database
-$hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_berita DESC");
+$id_berita = $_GET['id_berita'];
+$hasil = mysqli_query($connection, "SELECT * FROM  master_berita WHERE id_berita = '$id_berita'");
 ?>
 
 <!DOCTYPE html>
@@ -21,21 +25,19 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
 </head>
 
 <body>
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="home.php">Portal Berita</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="master-berita.php">Master Berita</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+
+  <?php
+  
+  if (isset($_SESSION['username'])) {
+  ?>
+    <a href="master-berita.php" type="button" class="btn btn-danger mx-2">Back</a>
+  <?php
+  }else{
+  ?>
+    <a href="home.php" type="button" class="btn btn-danger mx-2">Back</a>
+  <?php
+  }
+  ?>
 
 
 <!-- berita -->
@@ -48,14 +50,16 @@ $hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_ber
       $isiBerita = $row['deskripsi_berita'];
       $gambarBerita = $row['gambar_berita'];
   ?>
-    <div class="news-item">
-      <h2 class="text-center mt-3"><?php echo $judulBerita; ?></h2>
+  <div class="w-100 d-flex justify-content-center">
+    <div class="news-item w-75">
+      <h2 class="text-center mt-3 "><?php echo $judulBerita; ?></h2>
       <div class="text-center">
-        <img src="<?php echo $gambarBerita; ?>" alt="Gambar Berita">
+        <img width="500" src="<?php echo $gambarBerita; ?>" alt="Gambar Berita">
       </div>
       <p class="mt-3"><?php echo $isiBerita; ?></p>
       <hr> <!-- Optional: Add a horizontal line between news items -->
     </div>
+  </div>
   <?php
     }
   ?>
