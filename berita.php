@@ -1,3 +1,10 @@
+<?php
+// buat koneksi database dengan connect file
+include("connect.php");
+// fetch semua data motor dari database
+$hasil = mysqli_query($connection, "SELECT * FROM  master_berita ORDER by id_berita DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,39 +38,27 @@
   </nav>
 
 
-<button type="button" class="btn btn-success mx-5 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Tambah Berita
-</button>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Berita</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- berita -->
+<div class="container">
+  <?php
+    // Loop through the query results
+    while ($row = mysqli_fetch_assoc($hasil)) {
+      $judulBerita = $row['judul_berita'];
+      $isiBerita = $row['deskripsi_berita'];
+      $gambarBerita = $row['gambar_berita'];
+  ?>
+    <div class="news-item">
+      <h2 class="text-center mt-3"><?php echo $judulBerita; ?></h2>
+      <div class="text-center">
+        <img src="<?php echo $gambarBerita; ?>" alt="Gambar Berita">
       </div>
-      <div class="modal-body">
-        <form action="">
-          <div class="mb-3">
-            <label class="form-label">Judul Berita</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-          </div>
-        </form>
-       
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      <p class="mt-3"><?php echo $isiBerita; ?></p>
+      <hr> <!-- Optional: Add a horizontal line between news items -->
     </div>
-  </div>
+  <?php
+    }
+  ?>
 </div>
-
 </body>
 
 </html>

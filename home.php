@@ -30,15 +30,28 @@
     </div>
   </nav>
 
-  <!-- berita -->
-  <div class="container">
-    <div class="d-flex justify-content-center">
-      <h2 class="text-white mt-3 ">Bulan Depan Erick Thohir Akan Bubarkan Lagi Anak & Cucu BUMN</h2>
+<h1 class="text-white mt-5 mx-3" style="font-style: italic;">Sejumlah Berita Yang Kami Paparkan</h1>
+
+<!-- Card -->
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-5 mx-3">
+  <div class="col">
+    <div class="card bg-dark text-white">
+      <div class="container">
+        <div class="d-flex justify-content-center">
+          <img src="lukaku.jpeg" class="card-img-top" alt="..." style="width: 10cm;">
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align: center;">Judul Berita</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+          <div class="container">
+            <div class="d-flex justify-content-center">
+              <a href="berita.html" type="button" class="btn btn-primary ">Lihat Lebih</a>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
-  
-
-
-</body>
 
 </html>
